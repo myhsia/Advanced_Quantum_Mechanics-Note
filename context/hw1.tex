@@ -829,3 +829,513 @@
 
   Nonetheless, this interpretation isn't free of problems. The biggest challenge is the probability issue: if every outcome occurs somewhere, how do we make sense of the Born rule? And although it's admittedly strange to think there could be countless versions of ourselves living in parallel worlds, I still find Many-Worlds the most compelling. It offers a clean and coherent picture of quantum reality and addresses the measurement problem head-on, without compromise.
 \end{solution}
+
+\clearpage
+
+\setcounter{problem}{0}
+\begin{problem}[Function space]
+\end{problem}
+\begin{solution}[By TA]\leavevmode
+  \begin{enumext}
+    \item \[
+      \int_A |\psi(x)|^2 \d x
+    \]
+    To prove the three properties: Conjugate, Linearity,
+    and Positive-definiteness.
+    \item Fourier bases.
+    \begin{enumext}
+      \item $(-\infty, +\infty)$, the wavefunction
+      $\{\braket<x|k> = \frac1{\sqrt{2\pi}}\upe^{\iu kx}\}$,
+      $\alpha \sim k \in \mathbb R$.
+      The normalization
+      \[
+        \int_{-\infty}^{+\infty} \psi_k(x)^* \psi_k(x) \d x = \delta(k - k'),
+      \]
+      The orthonormality
+      \[
+        \int_{-\infty}^{+\infty} \psi_k(x) \psi_k(x') \d k = \delta(x - x')
+      \]
+      \begin{remark}[For $\{\ket|\alpha>\}$]
+        Orthonormality
+        \[
+          \braket<\alpha|\alpha'> = \delta_{\alpha\alpha'} \to
+          \int \d x \alpha^*(x) \alpha'(x) = \delta_{\alpha\alpha'}
+        \]
+        Completeness
+        \[
+          \sum_\alpha \ketbra|\alpha><\alpha| = \identity \to
+          \sum_\alpha \braket<x|\alpha>\braket<\alpha|x'> = \delta(x - x')
+        \]
+      \end{remark}
+      \begin{remark}[Or Haar basis:]
+      \[
+        \phi(x) = \begin{cases}
+          1, & 0 \leq x \leq 1,\\
+          0, & \text{otherwise}
+        \end{cases}, \quad
+        \psi(x) = 
+        \begin{cases}
+          1, & 0 \leq x \leq \frac12,\\
+          -1, & \frac12 \leq x < 1,\\
+          0, & \text{otherwise}
+        \end{cases}, \quad
+        \psi_{j,k}(x) = 2^{j/2} \psi(2^jx - k), \quad j, k \in \mathbb Z
+      \]
+      \end{remark}
+      \item $[-1, 1]$
+      \begin{paracol}{2}
+      The wavefunction
+      \[
+        \upe^{\iu k x}
+      \]
+      Then, $k \cdot \Delta x = n \cdot 2\pi$, $k_n = n\pi$. The basis
+      \[
+        \ab\{\frac1{\sqrt2} \upe^{\iu n\pi x}\}, \quad \alpha \sim n
+      \]
+      \switchcolumn \centering
+      \begin{tikzpicture}
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.25) rectangle (1.25,1.25);
+        \node [below] at (.5,0) {$\Delta x$};
+      \end{tikzpicture}
+      \end{paracol}
+      \item $(0, +\infty)$. The basis
+      \[
+        \ab\{\sqrt{\frac2\pi} \cos(kx), \quad \alpha \sim k \in \mathbb R^+\}
+      \]
+    \end{enumext}
+  \end{enumext}
+\end{solution}
+\begin{problem}[Strum-Liouville theory]
+\end{problem}
+\begin{solution}[By TA]\leavevmode
+  \begin{enumext}
+    \item Actually, the problem is something like
+    \[
+      \braket<u|v> = \int_{x_1}^{x_2} u^*(x) v(x) \omega(x) \d x, \qq{where}
+      \alpha(x),\ \beta(x),\ \gamma(x) \in \mathbbm R
+    \]
+    The operator
+    \[
+      \mathcal L = \omega^{-1} \odv*[fun]{\omega\alpha \odv*{}x}x + \gamma
+    = \alpha \odv*[2]{}x + \omega^{-1} \odv*[fun]{\omega\alpha}x + \gamma
+    \]
+    Then,
+    \[
+      \alpha(x)y'' + \beta(x)y' + \gamma(x)y = \lambda y, \quad
+      \beta(x) = \omega^{-1} \odv*[fun]{\omega\alpha}x \Rightarrow
+      \frac{\beta\omega\alpha}{\alpha} = \odv[fun]{\omega\alpha}x, \Rightarrow
+      \omega = \frac C\alpha \upe^{\int\frac\beta\alpha \d x}
+    \]
+    Or, it can be a extension of the inner product.
+    \begin{enumext}[columns = 3]
+      \item $\omega(\alpha) = C\upe^{-x^2} \sim \upe^{-x^2}$
+      \item $\omega(x) = C \sim 1$.
+      \item $\omega(x) = C\upe^{-x} \sim \upe^{-x}$.
+    \end{enumext}
+    \item Calculate directly
+    \[
+      \braket<u|\mathcal Lv> = \braket<\mathcal Lu|v>, \quad
+      \omega \in \mathbb R
+    \]
+    Then, we will obtain
+    \[
+      \mathcal \omega\alpha(u^*v' - u'^*v)\big|_{x_1}^{x_2}, \quad
+      \omega(x_2)\alpha(x_2) = \omega(x_1)\alpha(x_1) = 0
+    \]
+    \begin{enumext}
+      \item $(-\infty, +\infty)$
+      \[
+        H_n(x) = (-1)^n \upe^{x^2} \odv*[n]{\upe^{-x^2}}x, \quad
+        \upe^{-t^2+2xt} = \sum_{n=0}^\infty \frac{k\ln(x)}{n!}t^n
+      \]
+      \item $[-1, 1]$
+      \[
+        P_n(x) = \frac1{2^nn!} \odv*{(x^2 - 1)^n}x, \quad
+        \frac1{\sqrt{t^2 - 2xt + 1}} = \sum_{n=0}^\infty P_n(x)t^n
+      \]
+      \item 
+      \[
+        L_n(x) = \frac1{n!} \upe^x \odv*[n,fun]{\upe^{-x} x^n}x, \quad
+        \frac1{1 - t} \upe^{-\frac{tx}{1-t}} = \sum_{n=0}^\infty \ln(x) t^n
+      \]
+    \end{enumext}
+    \item Write the eigenfunctions
+    \[
+      \mathcal Lv_i = \lambda_i v_i, \quad
+      \braket<\mathcal Lv_1|v_2> = \braket<v_1|\mathcal Lv_2>
+    \]
+    then,
+    \[
+      (\lambda_1 - \lambda_2)\braket<v_1|v_2> = 0, \quad
+      \lambda_1 \neq \lambda_2,
+      \Rightarrow \braket<v_1|v_2> = 0
+    \]
+  \end{enumext}
+  \begin{remark}
+    Actually, an arbitrary function can be exapnded as
+    \[
+      f(x) = c_01 + c_1 x + c_2 x^2 + \cdots + c_nx^n + \cdots
+    \]
+    when one write it, he assumed that
+    \[
+      \{1, x, x^2, x^3, \cdots, x^n, \cdots\}
+    \]
+    has constructed a basis of $f(x)$. But they are not orthonormal.
+    We need to make the orthonormality between every two elements by
+    Scimet orthonormality, for example, in range $[0,1]$
+    \[
+      \int_{A \sim \mathbbm R} \d x \varphi^*(x) \chi(x) = \braket<\varphi|\chi>
+    \]
+    If the range is $\mathbbm R$, the integral $\int_{\mathbbm R} x^{n+m}$ makes
+    no sense. We need to make it square integral on the real axis by
+    multiplying, it would be something like a Gaussian function
+    $\omega(x) \sim \upe^{-x^2}$. Then, the integral becomes
+    \[
+      \int_\infty \d x \omega(x) x^{n+m} = 0
+    \]
+    To ``kill'' the functioin on both sides, or add the weight function
+    $\omega = \upe^{-x}$ to kill the function on one side.
+  \end{remark}
+\end{solution}
+\begin{problem}[Linear map]
+\end{problem}
+\begin{solution}[By TA]\leavevmode
+  \begin{enumext}
+    \item $L:\ V \to W$. Vector space $f(u)$
+    \begin{enumext}
+      \item $+$: identity, inverse, commutativity;
+      associativity: $(f_1 + f_2) + f_3 = \cdots$
+      \item $\times$: $a(bf_1) = (ab)f_1$ 
+      \item $+\times$: $a(f_1 + f_2)$, $(a + b)f_1$
+    \end{enumext}
+    \item $V$ and $W$ are two matrix, the transformation between is a matrix,
+    actually, a linear map. The matrix is JUST A TOOL.
+    \[
+      \bm v = \sum_{i=1}^{\dim(V)} c_i \bm v_i
+    \]
+    The core formula is
+    \[
+      f(v_i) = \sum_{j=1}^n w_i F_{ji} \equiv \bm u_i
+    \]
+    Which can be written into matrix
+    \[
+      (w_1, w_2, \cdots, w_n)
+      \pxmat[showtop = 1, showleft = 1]Fmn =
+      (u_1, u_2, \cdots, u_n)
+    \]
+    Uniqueness: The two vectors are unique, then, the matrix is unique.
+    \item For example
+    \[
+      \begin{pmatrix}
+        a & b\\ c& d
+      \end{pmatrix} = \sum_{i=1}^4 f_i M_i
+      = a\begin{pmatrix}
+        1 & 0\\0 & 0
+      \end{pmatrix} + b\begin{pmatrix}
+        0 & 1\\0 & 0
+      \end{pmatrix} + \begin{pmatrix}
+        0 & 0\\1 & 0
+      \end{pmatrix} + d\begin{pmatrix}
+        0 & 0\\0 & 1
+      \end{pmatrix}
+    \]
+    We can write
+    \[
+      A = \{F^{kl}, 1 \leq k \leq n,\ 1 \leq l \leq m\}, \quad
+      F^{kl}(\bm V_i) = \bm W_j \delta_{ik} \delta_{jl}
+    \]
+    \item By definition
+    \begin{align*}
+      \ker(f) & = \{v \in V|f(v) = 0\}\\
+      \im(f)  & = \{w\in W|w = f(v), v \in V\}\\
+      \dim(\ker(f)) & = s, \quad \dim(\im(f)) = m, \quad \dim(V) = g
+    \end{align*}
+    and prove $s + m = g$.
+    We can write
+    \[
+      S = \{v_1, v_2, \ldots, v_s\}, ~ f(v) = 0, \quad
+      M = \{v_{s+1}, \ldots, v_g\},  ~ f(v) = w
+    \]
+    For arbitrary $v$, $f(v) = 0$, it means a linear combination
+    \[
+      v = \sum_{i=1}^s c_iv_i, \quad v_i \in S
+    \]
+    Then, $f(v) = w \in W \Rightarrow v = \sum_{i=g+1}^g c_iv_i$, $v_i \im M$.
+    Substitute
+    \[
+      f(\bm v) = f\ab(\sum_{i=s+1}^g c_i \bm v_i)
+    = \sum_{i=s+1}^g c_i f(\bm v_i)
+    = \sum_{i=s+1}^g c_i \underbrace{f(\bm v_2)}_{w_i}
+    \]
+    Then, consider $v_{1 -- 3}$ and $w_{1 -- 3}$. Let
+    \[
+      w_1 = aw_2 + bw_3, \quad
+      f(v_1) = af(v_2) + bf(v_3), \quad = v_1 = av_2 + bv_3
+    \]
+    Then, we can prove the dim of $W$-space. $s + m = g$.
+    \paragraph{Interuption}
+    \[
+      (w_1, w_2, \cdots, w_n)
+      \pxmat[showtop = 1, showleft = 1]Fmn =
+      (u_1, u_2, \cdots, u_n)
+    \]
+    where the top three cols of $F$ is $0$.
+  \end{enumext}
+  \begin{remark}
+    $f:\ V\to W$. The kernel.
+    \[
+      \ker(f) = \{v\in V|f(v) = 0_w\}
+    \]
+    conduct the linear space.
+    The linear space always is
+    \[
+      (v, F) = (+, \times)
+    \]
+    about elements or operations.
+    If $v_1$, $v_2 \in \ker(f)$ then $av_1 + bv_2 \in \ker(f)$, $a$, $b \in F$.
+    i.e., $\ker$ is a linear space, also,
+    the $\im(f) = \{w\in W|\exists u\in V, w = f(u)\} < w$.
+    Also, we can separate an arbitrary vector in $V$
+    \begin{center}
+      \begin{tikzpicture}
+        \draw [->] (0,0) -- (2,0) node [below] {$f^{-1}(\im(f))$};
+        \draw [->] (0,0) -- (0,2) node [left] {$\ker(f)$};
+        \draw [->] (0,0) -- (1.5,1.5) node [above right] {$v \in V$};
+        \draw [dashed] (0,1.5) -- (1.5,1.5) -- (1.5,0);
+      \end{tikzpicture}
+    \end{center}
+  \end{remark}
+\end{solution}
+\begin{problem}[Coherent states]
+\end{problem}
+\begin{solution}[By TA]\leavevmode
+  \paragraph{Baker-Campbell-Hausdorff}
+  \[
+    D(\alpha) \equiv \upe^{\alpha\hat a^\dagger - \alpha^*\hat a}
+  = \upe^{\alpha\hat a^\dagger} \upe^{-\alpha^*\hat a}
+    \upe^{-\frac12[\alpha\hat a^\dagger, \alpha^*\hat a]}
+  \]
+  \begin{enumext}
+    \item By definition
+    \[
+      \hat a\ket|\alpha> = \alpha\ket|\alpha>
+    \]
+    Expand it
+    \[
+      \ket|\alpha> = \sum_{n=0}^\infty c_i \ket|n>
+    \]
+    Then,
+    \[
+      \hat a\ket|\alpha> = \sum_{n=0}^\infty c_{n+1} \sqrt{n+1} \ket|n>
+    = \alpha \sum_{n=0}^\infty c_n \ket|n>
+    \]
+    The coefficients
+    \[
+      c_{n+1}\sqrt{n + 1} = \alpha c_n, \quad
+      c_n = \frac{\alpha^n}{\sqrt{n!}} c_0
+    \]
+    Then, the coherent state can be written as the sum of fork basis
+    \[
+      \ket|\alpha> = N \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n!}} \ket|n>
+    \]
+    where
+    \[
+      \ket|n> = \frac1{\sqrt{n!}} (a^\dagger)^n \ket|0>
+    \]
+    So,
+    \[
+      \ket|\alpha> = N\sum_{n=0}^\infty
+      \frac{(\alpha\hat a^\dagger)^n}{n!}\ket|0>
+    \]
+    \item Normalization $\braket<\alpha|\alpha>_\alpha = 1$, insert the operator
+    \[
+      \braket<\hat a^\dagger \hat a|\alpha>
+    = (\hat a\ket|\alpha>)^\dagger\hat a\ket|\alpha> = |\alpha|^2
+    \]
+    Then,
+    \[
+      \ket|\alpha> = D(\alpha) \ket|0>
+    \]
+    Finally,
+    \[
+      \upe^{-\frac12|\alpha|^2\upe^{\alpha\hat a^\dagger}
+      \cancelto{\identity}{\upe^{-\alpha^*\hat a}}}\ket|0> \to \identity
+    + \hat a
+    \]
+    \item $\{\ket|\alpha> | \alpha \in \mathbb C\}$ overcomplete.
+    $\braket<\alpha|\beta> \neq 0$,
+    $\int \frac{\d^2\alpha}{\pi} \ketbra|\alpha><\alpha| = \identity$.
+    \[
+      \braket<n|\int\frac{\d^2\alpha}{\pi}|\alpha> \braket<\alpha|m>
+    = \delta_{nm}
+    = \frac1\pi \frac1{\sqrt{n!m!}} \int_0^\infty \d r r^{n+m+1}
+      \upe^{-r^2} \int_0^{2\pi} \d\varphi \upe^{\iu\varphi(n-m)}
+    = 2\pi\delta_{nm} \xlongequal{n=m} \delta_{nm}
+    \]
+    \item $\psi_\alpha(x) = \braket<x|\alpha>$.
+    \[
+      \braket<x|\hat a|\alpha> = \alpha \psi_\alpha(x)
+    = \frac1{\sqrt2} \ab(\frac x{l_0} + l_0 \pdif x) \psi_\alpha(x)
+    \]
+    It is an ODE. The solution is
+    \[
+      \psi_\alpha(x) = k\exp\ab\{
+        \ab(-\frac12\frac x{l_0} - \sqrt2\Re[\alpha])^2
+       + \iu\sqrt2\Im[\alpha] \frac x{l_0}\}
+    \]
+    where $k = (\pi l_0^2)^{-1/4}$.
+
+    The exponitional term
+    \[
+      \upe^{\frac{(x - x_0)^2}{2\sigma^2} + \iu\frac{p_0}{\hbar}x}
+    \]
+    The first part means the center of the wavefunction is $x_0$;
+    The second term: By Fourier transformation
+    \[
+      \tilde\psi_\alpha(p)
+    = N \int_{-\infty}^\infty \psi_\alpha(x) \upe^{-\iu px/\hbar} \d x
+    \propto \upe^{-\frac{(p-p_0)^2}{2\sigma_p^2} + \iu x_0 \frac p\hbar}
+    \]
+    Means that in the momentum space, centered with $p_0$.
+    The position and momentum is closely connected with each other.
+
+    Actually, for coherent state,
+    it should be $\upe^{-\frac1{2a}(x - x_c)^2}$ where $a = \Delta x$,
+    corresponding to $\Delta p$.
+    If define $l_0 = \sqrt{\frac\hbar{m\omega}}$, then $x \sim l_0$,
+    $k\sim l_0^{-1}$.
+    
+    Coherent state vs squeezed state.
+    Usually, $\braket<\alpha|\beta> \neq 0$, then define
+    $P(\alpha) = |\braket<\alpha|\alpha_0>|^2$.
+    The wavepack's centre is (the real part of on $x$ axis,
+    or the image part of $k$ axis) $\alpha_0$.
+  \end{enumext}
+\end{solution}
+\begin{problem}[Perturbed harmonic oscillator]
+\end{problem}
+\begin{solution}[By Li Jian]\leavevmode
+  \begin{enumext}
+    \item Time-independent:
+    $V = \epsilon_0 \hat x
+       = \frac{\epsilon_0}{\sqrt2}(\hat a + \hat a^\dagger)$.
+    We can consider it as an electric field: the oscillator have a positive
+    charge, then the electric potential is gradient.
+
+    In classical situation, just change the equilibirum point.
+    In quantum situation, to the exact solution, just merge
+    \[
+      H = \frac12 m\omega^2 (x - x_0)^2 + C
+    \]
+    Denote $\hat{\tilde x} = \hat x - x_0$,
+    then $[\hat{\tilde x}, \hat k] = \iu$. The annihilation operator
+    \[
+      \hat{\tilde a} = (\hat x + \iu \hat k)/\sqrt2, \quad
+      \hat{\tilde a} \ket|0> = 0, \quad (a^\dagger)^n \ket|0> \sim \ket|n>
+    \]
+    The matrix element
+    \[
+      V_{mn} = \braket<m|\hat V|n>
+    = V_0(\sqrt n\delta_{m+1,n} + \sqrt m\delta_{m,n+1})
+    \]
+    After pertubation, the state from ground state
+    \[
+      \ket|0> \to \ket|g> = \ket|0> + \ket|g^{(1)}> + \ket|g^{(2)}> + \cdots
+    \]
+    The energy
+    \[
+      E_g = E_0 + E_g^{(1)} + E_g^{(2)} + \cdots
+    \]
+    where $E_0 = \frac12\hbar\omega$.
+    The result
+    \begin{align*}
+      E_g^{(1)} & = V_{00} = \braket<0|\hat V|0> = 0,
+      \qq{Since the $00$-matrix element is excluded}\\
+      E_g^{(2)} & = \sum_{n=1}^\infty -\frac{V_{00} V_{n0}}{E_n - E_0}
+    = -\frac{V_0^2}{\hbar\omega}\\
+      \ket|g^{(1)}> & = \sum_{n=1}^\infty \ket|n> \ab(-\frac{V_{n0}}{E_n - E_0})
+  = -\frac{V_0}{\hbar\omega} \ket|1>\\
+      \ket|g^{(2)}> & = \sum_{n=1}^\infty \ket|n>
+      \ab[-\frac1{E_n - E_0}\ab(\frac{V_{n0}V_{00}}{E_n - E_0}
+    - \sum_{n=1}^\infty \frac{V_{nm}V_{mn}}{E_m - E_0})]
+    = \frac1{\sqrt2} \ab(\frac{V_0}{\hbar\omega})^2 \ket|2>
+    \end{align*}
+    The exact solution: Since the Hamiltonian
+    \[
+      \hat H = \frac12\hbar\omega\ab[\ab(\frac{\hat x}{l_0})^2 + (l_0\hat k)^2]
+    + \sqrt2 V_0 \frac{\hat x}{l_0}
+    = \frac12\hbar\omega\ab[\ab
+      (\frac{\hat x}{l_0} + \sqrt2\frac{V_0}{\hbar\omega})^2 + (l_0\hat k)^2]
+    - \frac{V_0^2}{\hbar\omega}
+    \]
+    where $l_0 = \sqrt{\frac{\hbar}{m\omega}}$, $V_0 = l_0\epsilon_0/\sqrt2$.
+    The ground energy of this Hamiltonian is
+    \[
+      \tilde E_0 = \underbrace{\frac12 \hbar\omega}_{E_0}
+    - \frac{V_0^2}{\hbar\omega}
+    \]
+    We can consider $\ket|0>$ as a coherent state
+    \[
+      \hat a\ket|0> = 0\ket|0>
+    \]
+    The wave function $\upe^{-\frac12(x-0)^2}$,
+    $(a^\dagger)^2 \ket|0> = \sqrt2\ket|2>$.
+    \[
+      \ket|g> = \ket|\alpha = -?\frac{V_0}{\hbar\omega}>
+    = \upe^{\alpha\hat a^\dagger} \ket|0>
+    = \upe^{-\frac{V_0}{\hbar\omega}a^\dagger} \ket|0>
+    = \ket|0> + \ab(-\frac{V_0}{\hbar\omega}\ket|1>)
+    + \frac12\ab(-\frac{V_0}{\hbar\omega})^2\sqrt2\ket|2>
+    \], i.e., the coherent
+    state which center is shifted, and the exact solutions and pertubation
+    solutions are corresponding.
+    \item To simplify, we need to use the interaction picture
+    \[
+      V^\text I(t) = \upe^{\frac\iu\hbar\hat H_0t} \hat V^\text S(t)
+                     \upe^{-\frac\iu\hbar\hat H_0t}
+    = \hbar V(t) (\hat a\upe^{-\iu\omega t} + \hat a^\dagger \upe^{\iu\omega t})
+    \]
+    where $\hat H_0$ contains $a^\dagger a$ and $\hat V^\text S(t)$
+    contains $\hat a + \hat a^\dagger$,
+    $v(t) = \frac{\epsilon(t)l_0}{\sqrt2\hbar}$. The coefficient
+    \[
+      \underset{0\to n}{c_n^{(1)}(t)}
+    = -\frac\iu\hbar \int_0^t \d t' \braket<n|\hat V^\text I(t')|0>
+    = -\iu\mu_\omega(t) \delta_{n,1}
+    \]
+    where $\mu_\omega(t) = \int_0^t \d t' v(t') \upe^{\iu\omega t'}$.
+    The amplitude of second jump is
+    \[
+      c_n^{(2)}(t) = (-\frac\iu\hbar)^2 \int_0^t \d t_1 \int_0^{t_1} \d t_2
+        \braket<n|\hat V^\text I(t_1)\hat V^\text I(t_2)|0>
+    = -\ab[\frac12|\mu_\omega(t)|^2 - \iu C] \delta_{n,0}
+    + (-\iu)^2 \frac{\mu_\omega^2(t)}{\sqrt2} \delta_{n,2}
+    \]
+    At $t = 0$, the evolution of $\ket|0>$ under $\hat U(t)$
+    \[
+      \ket|0> \xlongrightarrow{\hat U(t)} \ket|?>
+    \]
+    Since the Heisenberg time-dependent operator
+    \[
+      \hat a(t) \equiv \hat U(t) \hat a \hat U(t)^{-1} \equiv f_t(\hat a)
+    \]
+    To solve it, back to the Heisenberg equation
+    \[
+      \odv*{f_t(\hat a)}t = g_t(\hat a)
+    \]
+    where $\iu\odv{U(t)}t = HU$, $-\iu\odv{U(t)}t^{-1} = U(t)^{-1}H(t)$.
+    It tells
+    \[
+      \hat a\hat U(t) = \hat U(t) f_t(\hat a)
+    \]
+    Consider
+    \[
+      \hat a(\hat U(t)\ket|0>) = \hat U(t) f_t(\hat a) \ket|0>
+    = f_t(0) (\hat U(t) \ket|0>)
+    \]
+    i.e., the exact solution $\ket|\alpha> = \ket|\alpha = f_t(0)>$, and it can
+    also be expanded $\sum_n(c_n) \ket|n>$. The eigenvalue of unperturbed state
+    is time-dependent $\alpha(t) = -\iu\upe^{-\iu\omega t} \mu_\omega(t)$.
+  \end{enumext}
+\end{solution}
