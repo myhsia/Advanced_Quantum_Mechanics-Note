@@ -1095,6 +1095,265 @@ This is why the degeneracy occurs.
 = E(\hat\rho\ket|\psi>).
 \]
 
+\paragraph{Quick Review of Group Representation}
+
+Starting from
+\[
+  \underset{\text{Group}}G
+  \overset{\tau}{\underset{\text{acts on}}{\circlearrowright}}
+  \underset{\text{linear space}}V, \quad
+  \tau:\ G \rightarrow
+  \underset{\text{Linear operator space on $V$}}
+    {\overset{\text{opened}}G\overset{\text{linear}}L(V)}
+\]
+where $\tau$ is homomorphism:
+\[
+  \forall \underset{\rotatebox{-90}{$\mapsto A_{1,2}$}}{g_{1,2}} \in G, \quad
+  (g_1 \circ g_2) \longmapsto A_1 A_2
+\]
+
+\begin{example}
+  For the group $D_3 = \{e, R, R^2, \rho_0, \rho_1, \rho_2\} \cong S_3$
+  which satisfy $R^3 = \rho^2 = e,\ R\rho = \rho R^2$.
+  \begin{paracol}{2}
+    \[
+      (\quad),\ (012) = (120) = (201),\ (021),\ (12),\ (20),\ (01)
+    \]
+    For example, $(12)(12) = (\quad)$, $(012)(12) = (10)$.
+    \switchcolumn \centering
+    \begin{tikzpicture}[scale = 1.5]
+      \draw [rotate = 10] (0,0) coordinate (a)
+       node [left] {$1, \ket|1>$} -- (0,-1) coordinate (b)
+       node [below] {$2, \ket|2>$} -- ({sqrt(3)/2},-.5)
+       coordinate (c) node [right] {$0, \ket|0>$} -- cycle;
+      \draw [->] (c) to[bend right = 20] (a);
+      \draw [->] (a) to[bend right = 20] (b);
+      \draw [->] (b) to[bend right = 20] (c);
+    \end{tikzpicture}
+  \end{paracol}
+  Then, for the group multiplication
+  \[
+    (12)(012) = (12)(120) = (12)(12)(20) = (20), \quad
+    (12)(021) = (12)(210) = (12)(21)(10) = (10)
+  \]
+  Consider taking $i \mapsto \ket|i>$, basis of Hilbert space $V$
+  ($\{\ket|0>, \ket|1>, \ket|2>\}$). Then, the identities become
+  \[
+    \hat R\ket|i> = \ket|R(i)>,   \quad
+    \hat R\rho\ket|i> = \ket|\rho(i)>.
+  \]
+  Then, we can say $\{e, R, R^2, \rho_0, \rho_1, \rho_2\} \subset V$.
+  The Hilbert space can be composed into two parts
+  \[
+    V = V_{\psi_0} \oplus V_{\{\psi_1,\psi_2\}}
+  \]
+  where $\ket|\psi_n>$ means $\hat R\ket|\psi_n> = \omega^n \ket|\psi_n>$,
+  $\omega = \upe^{\iu\frac{2\pi}{3}}$.
+  So, the subspace
+  \[
+    V_{\psi_0} = \operatorname{span}(\{\psi_0\}),\
+    V_{\{\psi_1,\psi_2\}} = \operatorname{span}(\{\psi_1,\psi_2\})
+  \]
+  $\forall \hat g \in \hat D_3$,
+  \[
+    g =
+    \begin{pNiceArray}{c|cc}[first-col, last-row]
+      \ket|\psi_0> &
+      \Block[tikz = {pattern = north east lines, pattern color = teal}]{}{}
+      & \Block{1-2}{O}\\
+      \hline
+      \ket|\psi_1> & \Block{2-1}{O} &
+      \Block[tikz = {pattern = north east lines, pattern color = teal}]{2-2}{}\\
+      \ket|\psi_2> & \\
+    & \bra<\psi_0| & \bra<\psi_1| & \bra<\psi_2|
+    \end{pNiceArray}
+  \]
+  where the generator
+  \[
+    R = \begin{pNiceArray}{c|cc}
+      1 & \Block{1-2}{O}\\
+      \hline
+      \Block{2-1}{O} & \omega\\
+      & & \omega^*
+    \end{pNiceArray}, \quad
+    \rho = \begin{pNiceArray}{c|cc}
+      1 & \Block{1-2}{O}\\
+      \hline
+      \Block{2-1}{O} & & 1\\
+      & 1
+    \end{pNiceArray}
+  \]
+  we label the subspace $V_{\psi_0}$ as $A_1$, and label $V_{\{\psi_1,\psi_2\}}$
+  as $E$. Then
+  \[
+    e_A = 1,\quad R_{A_1} = 1, \quad \rho_{A_1} = 1 \Rightarrow g_{A_1} = 1,
+  \]
+  \[
+    e_E = \pdiagmat[empty = {}]{1,1},\quad
+    R_E = \pdiagmat[empty = {}]{\omega, \omega^*}, \quad
+    \rho_E = \begin{pmatrix}
+      & 1\\1
+    \end{pmatrix} \text{(Equivalent Representations)}
+  \]
+  The multiplication
+  \[
+    R_E \rho_E = \begin{pmatrix}
+      0 & \omega \\ \omega^* & 0
+    \end{pmatrix} = \rho_E R_E^2 = \begin{pmatrix}
+      & \omega \\\omega^*
+    \end{pmatrix} \pdiagmat[empty = {}]{\omega^*, \omega}.
+  \]
+  For non-Abelian group, $\hat R\hat \rho \neq \hat \rho \hat R$.
+  \[
+    \text{\underline{minimal} invariant subspace} \leftrightarrow
+    \text{\underline{irreducible} (sub)representation}
+  \]
+\end{example}
+Now, consider the Hilbert space becomes
+\[
+  \operatorname{opan}(\{\ket|0\pm>, \ket|1\pm>, \ket|2\pm>\}).
+\]
+Induce
+\[
+  i \pm \mapsto \ket|i\pm>, \quad
+  \hat R\ket|i,s> = \ket|i+1,s>,\
+  \hat\rho \ket|i,s> = \ket|-i,-s>
+\]
+Consider the Hamiltonian
+\[
+  \hat H = \sum_{j,s,j',s'} \ketbra|j,s>h_{js;j's'} <j's'|
+\]
+which satisfies
+\[
+  [\hat R, \hat H] = [\hat\rho, \hat H] = 0
+\]
+\[
+  \begin{array}{c}
+    \{\text{Transformations on Real Space}\}\\
+    \text{def} \downarrow \uparrow \text{represent}\\
+    G\\
+    \downarrow \text{represent}\\
+    \{\text{Transformations on
+      $\underset{\text{HS $V$ represent}
+        \{\text{Transformations on Operator Space}\}}
+        {\text{Function Space}}$}\}, \quad \{V \to V\}
+  \end{array}
+\]
+For invariant subspace $W$ (group action):
+$\forall g \in G$, $\ket|w> \in W$, we have
+\[
+  \hat g (= \tau(g)) \ket|w> \in W
+\]
+Now, minimal invariant subspace $\leftrightarrow$ irreducible representation.
+Choose $\ket|\psi_1>$, which satisfies
+\[
+  \hat H\ket|\psi_1> = E\ket|\psi_1>
+\]
+Then, $\ket|\psi_2> = \hat\rho\ket|\psi_1>$, and they are orthogonal to each
+other $\braket<\psi_2|\psi_1> = 0$, then
+\[
+  \hat H \hat \rho \ket|\psi_1> = E\hat \rho \ket|\psi_1>
+\]
+\paragraph{Schur's Lemma}
+In irrepresentation $\tau$, if $[\hat H_\tau, \hat g_\tau] = 0$
+$\forall g \in G$, then it is the irrepresentation of $G$.
+Then, $\hat H_\tau = E\identity_\tau$,
+which call $\dim(V_\tau) = \#\text{Degeneracy}$.
+
+\paragraph{Space Inversion \& Time Reversal}
+
+\begin{center}
+  \begin{minipage}[t]{.64\linewidth}
+    \centering
+    \begin{tabular}{*3l}
+      \toprule
+      Classical & $\mathcal I = \rho_x \rho_y \rho_z$ & $\mathcal T$\\
+      \midrule
+      & $\bm r \to -\bm r$, $t \to t$ &
+      $t \to -t$, $\bm r \to \bm r$\\
+      & $\bm p \to -\bm p$ & $\bm p \to -\bm p$\\
+      \midrule
+      Polar (Vector) & $\bm E \to -\bm E$ & $\bm E \to \bm E$\\
+      Axial (Pseudo vector) & $\bm B \to \bm B$ & $\bm B \to -\bm B$\\
+      $\bm E = -\nabla\varphi$ & $\varphi \to \varphi$ & $\varphi \to \varphi$\\
+      $\bm A = \nabla \times \bm B$ & $\bm A \to -\bm A$ & $\bm A \to \bm A$\\
+      \bottomrule
+    \end{tabular}
+  \end{minipage} \hfill
+  \begin{minipage}[t]{.32\linewidth}
+  Quantum:
+
+  \begin{tabular}{ll}
+    \toprule
+    $\hat I$ & $\hat T$\\
+    \midrule
+    $\hat I \hat{\bm r} \hat I^{-1} = -\hat{\bm r}$ &
+    $\hat T\hat{\bm r}\hat T^{-1} = \hat{\bm r}$\\
+    $\hat I \hat{\bm p} \hat I^{-1} = -\hat{\bm p}$ &
+    $\hat T\hat{\bm p}\hat T^{-1} = -\hat{\bm p}$\\
+    $\hat I[\hat x, \hat p_x]\hat I^{-1} = [-\hat x, -\hat p_x] = \iu$ &
+    $\hat T[\hat x, \hat p_x]\hat T^{-1} = [\hat x, -\hat p_x] = -\iu$\\
+    \bottomrule
+  \end{tabular}
+  \end{minipage}
+\end{center}
+
+For $\hat f$ anti-linear
+\[
+  \hat f(a\ket|\psi> + b\ket|\chi>
+= a^*\hat f\ket|\varphi> + b^*\hat f\ket|\chi>)
+\]
+Norm-preserving
+\[
+  \braket<\hat f\psi|\hat f\psi> = \braket<\psi|\psi>
+\]
+\paragraph{Quiz}
+Prove that $\forall \psi,\ x_i$,
+$\braket<\hat f\psi|\hat f\chi> = \braket<x|\psi> = \braket<\psi|\chi>^*$.
+BTW, when it is satisfied, $f$ is called anti-unitary.
+
+We already have
+for $\hat I$: $\{e, I\}$, $I^2 = e$;
+and for $T$: $\{e,T\}$, $T^2 = e$.
+Combine irreps of $\{e,i\}$, and $i^2 = e$ called involution.
+\[
+  \ket|\psi> \sim \upe^{\iu\theta}\ket|\psi> \in V,
+\]
+then
+\[
+  \hat e\ket|\psi> = \ket|\psi>, \quad
+  \hat i\ket|\psi> = \ket|\chi>, \quad
+  \hat i^2 \ket|\psi> = \hat i \ket|\chi> = \upe^{\iu\theta} \ket|\psi>.
+\]
+Take $\ket|\chi> \propto \ket|\psi>$, then $\braket<\psi|\chi> = 0$.
+Start with $\hat i$ be unitary with $\hat I$ is unitary.
+We can always construct another state with a linear combination
+\[
+  \ket|\phi> = a\ket|\psi> + b\ket|\chi>,
+\]
+Then,
+\[
+  \ket|\phi> \propto \hat i_\pm\ket|\phi> = a_\pm\ket|\chi> + b\upe^{\iu\theta}\ket|\psi>
+\]
+Rearrange it
+\[
+  \frac{b\upe^{\iu\theta}}{a} = \frac ab, \quad
+  \ab(\frac ab)^2 = \upe^{\iu\theta}, \quad
+  g = 1,\ a_\pm = \pm \upe^{\iu\theta}
+\]
+For anti-unitary, we need to
+\[
+  \ket|\phi> \propto \hat i\ket|\phi>
+= a^*\ket|\chi> + b^*\upe^{\iu\theta}\ket|\psi>
+\]
+Rearrange it
+\[
+  \frac{b^* \upe^{\iu\theta}}{a} = \frac{a^*}{b} \Rightarrow
+  |a|^2 = |b|^2\upe^{\iu\theta}
+\]
+If $|a|^2 = |b|^2$, $\upe^{\iu\theta} = 1$.
+
+
 \subsection{Degeneracies}
 
 \section{Angular momentum, Lie algebra}
